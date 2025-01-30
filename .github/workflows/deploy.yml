@@ -1,0 +1,25 @@
+name: Deploy to S3 🚀
+
+on:
+  push:
+    branches:
+      - main  # Runs when changes are pushed to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWSACCESSKEYID }}
+        aws-secret-access-key: ${{ secrets.AWSSECRETACCESSKEY }}
+        aws-region: ${{ secrets.REGION }}
+
+    - name: Deploy to S3
+      run: |
+        aws s3 sync . s3://${{ secrets.S3BUCKETNAME }} --delete
