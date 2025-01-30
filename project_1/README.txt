@@ -1,0 +1,1 @@
+Host a static website (HTML/CSS/JS) on AWS S3, serve it securely using CloudFront, and automate deployments using GitHub Actions.
